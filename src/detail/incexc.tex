@@ -1,0 +1,40 @@
+\subsection*{容斥原理}
+
+
+\begin{frame}{容斥原理}
+	我们都知道 \(A\cup B=|A|+|B|-|A\cap B|\), 实际上这就是容斥定理的特例
+\end{frame}
+
+
+\begin{frame}[fragile]{容斥原理}
+	\begin{theorem}[容斥原理]
+		\label{incexc:th:incexc}
+
+		设 \(S\) 是全集, \(A_1,A_2,\dots A_m\) 是 \(S\) 的子集, 则
+
+		\begin{equation}
+			\label{incexc:eq:incexc1}
+			\left|\bigcap_{\lambda\in\Lambda}\overline{A_{\lambda}}\right|=\sum_{\Lambda_0\in 2^{\Lambda}}(-1)^{|\Lambda_0|}\left|\bigcap_{\lambda\in\Lambda_0}A_{\lambda}\right|
+		\end{equation}
+	\end{theorem}
+\end{frame}
+
+
+\begin{frame}{容斥原理}
+	式 (\ref{incexc:eq:incexc1}) 等价于:
+
+	\begin{equation}
+		\label{incexc:eq:incexc2}
+		\begin{aligned}
+			\left|\overline{A_1}\cap\overline{A_2}\cap\dots\cap\overline{A_m}\right| = & |S|                                   \\
+			                                                                           & -\sum_{i}|A_i|                        \\
+			                                                                           & +\sum_{i,j}|A_i\cap A_j|              \\
+			                                                                           & -\sum_{i,j,k}|A_i\cap A_j\cap A_k|    \\
+			                                                                           & +\dots                                \\
+			                                                                           & +(-1)^m|A_1\cap A_2\cap\dots\cap A_m|
+		\end{aligned}
+	\end{equation}
+
+	\pause
+	一般在应用时, 式 (\ref{incexc:eq:incexc1}) 等式左边表示至少选 \(m\) 个东西时的方案数, 等式右边表示恰好选 \(n\) 个东西时的方案数
+\end{frame}

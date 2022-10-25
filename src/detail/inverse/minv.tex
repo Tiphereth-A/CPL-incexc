@@ -1,0 +1,36 @@
+\begin{frame}[fragile]{M\"obius 反演}
+	\begin{theorem}[M\"obius 反演]
+		\label{incexc:th:minv}
+		设 \(f\), \(g\) 是数论函数, 则
+
+		\begin{equation}
+			\label{incexc:eq:minv1}
+			f=g*\{1\}\iff g=f*\mu
+		\end{equation}
+
+		或者写作
+
+		\begin{equation}
+			\label{incexc:eq:minv2}
+			f(n)=\sum_{d\mid n}g(d)\iff g(n)=\sum_{d\mid n}f(d)\mu\left(\frac{n}{d}\right)
+		\end{equation}
+	\end{theorem}
+
+	\pause
+	M\"obius 反演往往会配合整除分块来加速求和速度
+\end{frame}
+
+
+\begin{frame}{证明}
+	由引理 (\ref{incexc:lm:inv}), 取 \(a(n,i)=[i\mid n]\), \(b(n,i)=\mu\left(\frac{n}{i}\right)\)
+
+	\pause
+	则
+	\[
+		\begin{aligned}
+			\sum_{j=i}^n b(n,j)a(j,i) & =\sum_{j=i}^n [i\mid j]\mu\left(\frac{n}{j}\right) \\
+			                          & =\sum_{j\mid n} \mu\left(\frac{n}{j}\right)        \\
+			                          & =[n=i]
+		\end{aligned}
+	\]
+\end{frame}

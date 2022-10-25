@@ -1,0 +1,108 @@
+\begin{frame}[fragile]{已经没有什么好害怕的了}
+	\sout{来点私货}
+
+	\includeimage[scale=0.2]{bzoj3622_n_1.png}{もう何も怖くない！}
+\end{frame}
+
+
+\begin{frame}[fragile,allowframebreaks]{BZOJ 3622 已经没有什么好害怕的了}
+	\label{incexc:example:bzoj3622}
+
+	\textbf{题目描述}
+
+	已经使 Madoka 有签订契约, 和自己一起战斗的想法后, Mami 忽然感到自己不再是孤单一人了呢
+
+	于是, 之前的谨慎的战斗作风也消失了, 在对 Charlotte 的傀儡使用终曲——Tiro Finale 后, Mami 面临着即将被 Charlotte 的本体吃掉的局面
+
+	这时, 已经多次面对过 Charlotte 的 Homura 告诉了学 OI 的你这样一个性质: Charlotte 的结界中有两种具有能量的元素, 一种是``糖果'', 另一种是``药片'', 各有 \(n\) 个. 在 Charlotte 发动进攻前, ``糖果''和``药片''会两两配对, 若恰好糖果比药片能量大的组数比``药片''比``糖果''能量大的组数多 \(k\) 组, 则在这种局面下, Charlotte 的攻击会丢失, 从而 Mami 仍有消灭 Charlotte 的可能
+
+	你必须根据 Homura 告诉你的``糖果''和``药片''的能量的信息迅速告诉 Homura 这种情况的个数
+
+	\textbf{输入格式}
+
+	第一行两个整数 \(n,k\), 含义如题目所描述
+
+	接下来一行 \(n\) 个整数, 第 \(i\) 个数表示第 \(i\) 个糖果的能量
+
+	接下来 \(n\) 个整数, 第 \(j\) 个数表示第 \(j\) 个药片的能量
+
+	保证上面两行不会有重复的数字
+
+	\textbf{输出格式}
+
+	一个答案, 表示消灭 Charlotte 的情况个数, 需要对 \(10^9+9\) 取模
+
+	\textbf{样例输入}
+
+	\includecode[common]{bzoj3622.in}
+
+	\textbf{样例输出}
+
+	\includecode[common]{bzoj3622.ans}
+
+	\textbf{样例解释}
+
+	正确的组合为:
+
+	(5-40,35-20,15-10,45-30), (5-40,45-20,15-10,35-30), (45-40,5-20,15-10,35-30), (45-40,35-20,15-10,5-30)
+
+	\textbf{数据范围}
+
+	对于 \(100\%\) 的数据, \(1 \le n \le 2000\), \(0 \le k \le n\)
+\end{frame}
+
+
+\begin{frame}{题解}
+	\only<1->{给出两个长度均为 \(n\) 的序列 \(A\) 和 \(B\), 保证这 \(2n\) 的数互不相同, 要求将 \(A\) 和 \(B\) 中的数重新排列, 使得其中满足 ``\(A_i>B_i\) 的对数比 \(A_i<B_i\) 的对数恰好多 \(k\)'' 的方案数, 答案模 \(10^9+9\)}
+
+	\only<2->{显然当 \(2\nmid n-k\) 时答案为 \(0\), 当 \(2\nmid n-k\) 时, \(A_i>B_i\) 的对数为 \(\frac{n+k}{2}\), 令其为 \(m\)}
+
+	\only<3->{首先我们对 \(A\) 和 \(B\) 升序排序, 这里的``恰好''难以处理, 故这里考虑应用二项式反演转为``至少''的情况}
+\end{frame}
+
+
+\begin{frame}{题解}
+	设
+	\begin{itemize}
+		\item \(h(i,j)\) 表示考虑 \(A\) 的前 \(i\) 个数, 其中有至少 \(j\) 对满足 \(A_x>B_x\) 的数的方案数
+		\item \(c(i)\) 为 \(B\) 中小于 \(A_i\) 的数的个数
+	\end{itemize}
+
+	\pause
+	则
+	\begin{equation}
+		h(i,j)=h(i-1,j)+h(i-1,j-1)(c(i)-(j-1))
+	\end{equation}
+\end{frame}
+
+
+\begin{frame}{题解}
+	设
+	\begin{itemize}
+		\item 将 \(A\) 和 \(B\) 中的数重新排列, 使得其中满足 ``\(A_i>B_i\) 的对数至少为 \(k\)'' 的方案数为 \(f(k)\)
+		\item 将 \(A\) 和 \(B\) 中的数重新排列, 使得其中满足 ``\(A_i>B_i\) 的对数恰好为 \(k\)'' 的方案数为 \(g(k)\)
+	\end{itemize}
+
+	\pause
+	则
+	\begin{equation}
+		(n-m)! h(n,m)=f(m)=\sum_{i=m}^n\binom{i}{m}g(i)
+	\end{equation}
+\end{frame}
+
+
+\begin{frame}{题解}
+	进而由式 (\ref{incexc:eq:biinv3}), 得
+
+	\pause
+	\begin{equation}
+		g(m)=\sum_{i=m}^n(-1)^{i-m}\binom{i}{m}f(i)=\sum_{i=m}^n(-1)^{i-m}\binom{i}{m}(n-i)! h(n,i)
+	\end{equation}
+
+	\textbf{时间复杂度} \(O(n^2)\)
+\end{frame}
+
+
+\begin{frame}[fragile,allowframebreaks]{参考实现}
+	\includecode[c++]{bzoj3622.cpp}
+\end{frame}

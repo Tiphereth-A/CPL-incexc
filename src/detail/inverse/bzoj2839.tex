@@ -1,0 +1,63 @@
+\begin{frame}[fragile]{BZOJ 2839 集合计数}
+	\label{incexc:example:bzoj2839}
+
+	\textbf{题目描述}
+
+	一个有N个元素的集合有 \(2^n\) 个不同子集 (包含空集), 现在要在这 \(2^n\) 个集合中取出若干集合 (至少一个), 使得它们的交集的元素个数为 \(k\), 求取法的方案数, 答案模 \(1~000~000~007\) (是质数喔\~)
+
+	\textbf{输入格式}\xspace 一行, 两个整数 \(n,k\)
+
+	\textbf{输出格式}\xspace 一行, 为答案
+
+	\textbf{样例输入}
+
+	\includecode[common]{bzoj2839.in}
+
+	\textbf{样例输出}
+
+	\includecode[common]{bzoj2839.ans}
+\end{frame}
+
+
+\begin{frame}{题解}
+	显然, 固定 \(i\) 个元素, 包含这 \(i\) 个元素的集合有 \(2^{n-i}\) 个, 这些集合幂集的非空元素个数为 \(2^{2^{n-i}}-1\), 所以在这 \(2^n\) 个集合中取出若干集合 (至少一个), 使得它们的交集的元素个数至少为 \(k\) 的方案数为
+
+	\pause
+	\begin{equation}
+		\label{incexc:eq:bzoj2839-1}
+		\binom{n}{k}\left(2^{2^{n-k}}-1\right)
+	\end{equation}
+\end{frame}
+
+
+\begin{frame}{题解}
+	设
+	\begin{itemize}
+		\item 在这 \(2^n\) 个集合中取出若干集合 (至少一个), 使得它们的交集的元素个数至少为 \(k\) 的方案数为 \(f(k)\)
+		\item 在这 \(2^n\) 个集合中取出若干集合 (至少一个), 使得它们的交集的元素个数恰好为 \(k\) 的方案数为 \(g(k)\)
+	\end{itemize}
+
+	\pause
+	则由式 (\ref{incexc:eq:bzoj2839-1}), 得
+
+	\begin{equation}
+		\binom{n}{k}\left(2^{2^{n-k}}-1\right)=f(k)=\sum_{i=k}^n\binom{i}{k}g(i)
+	\end{equation}
+\end{frame}
+
+
+\begin{frame}{题解}
+	进而由式 (\ref{incexc:eq:biinv3}), 得
+
+	\pause
+	\begin{equation}
+		g(k)=\sum_{i=k}^n(-1)^{i-k}\binom{i}{k}f(i)=\sum_{i=k}^n(-1)^{i-k}\binom{i}{k}\binom{n}{i}\left(2^{2^{n-i}}-1\right)
+	\end{equation}
+
+	\textbf{时间复杂度} \(O(n)\)
+\end{frame}
+
+
+\begin{frame}[fragile,allowframebreaks]{参考实现}
+	\includecode[c++]{bzoj2839.cpp}
+\end{frame}

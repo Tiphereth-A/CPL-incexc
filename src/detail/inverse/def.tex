@@ -1,0 +1,34 @@
+\begin{frame}[fragile]{介绍}
+	反演实际上就是逆运算
+\end{frame}
+
+
+\begin{frame}{反演}
+	\begin{lemma}[反演]
+		\label{incexc:lm:inv}
+
+		\begin{equation}
+			\label{incexc:eq:inv}
+			f(n)=\sum_{i=0}^n a(n,i)g(i)\iff g(n)=\sum_{i=0}^n b(n,i)f(i)
+		\end{equation}
+
+		成立的充要条件是
+
+		\begin{equation}
+			\label{incexc:eq:inv2}
+			\sum_{j=i}^n b(n,j)a(j,i)=[n=i]
+		\end{equation}
+	\end{lemma}
+\end{frame}
+
+
+\begin{frame}{证明}
+	\[
+		\begin{aligned}
+			f(n)=\sum_{i=0}^n a(n,i)g(i)\iff\sum_{i=0}^n b(n,i)f(i) & =\sum_{i=0}^n b(n,i)\sum_{j=0}^i a(i,j)g(j) \\
+			                                                        & =\sum_{j=0}^ng(j)\sum_{i=j}^nb(n,j)a(j,i)   \\
+			                                                        & =\sum_{j=0}^ng(j)[n=j]                      \\
+			                                                        & =g(n)
+		\end{aligned}
+	\]
+\end{frame}
