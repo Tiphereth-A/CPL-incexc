@@ -1,0 +1,39 @@
+\begin{frame}[fragile]{错排数}
+	\begin{definition}[错排数]
+		若一个有 \(n\) 个元素的排列中所有元素都不在自己原来的位置上, 这样的排列称为原排列的一个错排
+
+		将一个有 \(n\) 个元素的排列中的错排个数称为错排数, 记为 \(D_n\) 或 \(!n\)
+	\end{definition}
+\end{frame}
+
+
+\begin{frame}[fragile]{错排数}
+	考虑令 \(S\) 是所有有 \(n\) 个元素的排列, \(A_i\) 是所有满足 \(p_i=i\) 的排列 \(p\) 构成的集合, 则所求即为
+
+	\begin{equation}
+		D_n=\left|\bigcap_{i=1}^n\overline{A_i}\right|
+	\end{equation}
+\end{frame}
+
+
+\begin{frame}[fragile]{错排数}
+	由式 (\ref{incexc:eq:incexc1}) 可得
+
+	\begin{equation}
+		\begin{aligned}
+			D_n & =\left|\bigcap_{i=1}^n\overline{A_i}\right|                                                             \\
+			    & =\sum_{\Lambda_0\in 2^{\Lambda}}(-1)^{|\Lambda_0|}\left|\bigcap_{\lambda\in\Lambda_0}A_{\lambda}\right| \\
+			    & =\sum_{i=1}^n(-1)^{i-1}n^{\underline{i}}                                                                \\
+			    & =n!\sum_{i=1}^n\frac{(-1)^{i-1}}{i!}
+		\end{aligned}
+	\end{equation}
+\end{frame}
+
+
+\begin{frame}[fragile]{错排数}
+	显然
+
+	\begin{equation}
+		\lim_{n\to\infty}\frac{!n}{n!}=\frac{1}{e}
+	\end{equation}
+\end{frame}

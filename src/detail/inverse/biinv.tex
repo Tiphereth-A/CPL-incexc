@@ -1,0 +1,101 @@
+\begin{frame}[fragile]{二项式反演 - 形式1}
+	\begin{theorem}
+		\label{incexc:th:biinv1}
+
+		\begin{equation}
+			\label{incexc:eq:biinv1}
+			f(n)=\sum_{i=0}^n(-1)^i\binom{n}{i}g(i)\iff g(n)=\sum_{i=0}^n(-1)^i\binom{n}{i}f(i)
+		\end{equation}
+	\end{theorem}
+\end{frame}
+
+
+\begin{frame}{证明}
+	\only<1-2>{由引理 (\ref{incexc:lm:inv}), 取 \(a(n,i)=b(n,i)=(-1)^i\binom{n}{i}\), 则 \(\forall i\ne n\),}
+
+	\only<2>{\[
+			\begin{aligned}
+				\sum_{j=i}^n b(n,j)a(j,i) & =\sum_{j=i}^n (-1)^{i+j}\binom{n}{j}\binom{j}{i}              \\
+				                          & =\sum_{j=i}^n (-1)^{i+j}\binom{n}{i}\binom{n-i}{n-j}          \\
+				                          & =(-1)^i\binom{n}{i} \sum_{j=i}^n (-1)^j\binom{n-i}{n-j}       \\
+				                          & =(-1)^i\binom{n}{i} \sum_{j=0}^{n-i} (-1)^{n-j}\binom{n-i}{j} \\
+				                          & =(-1)^i\binom{n}{i} (1-1)^{n-i}                               \\
+				                          & =0
+			\end{aligned}
+		\]}
+
+	\only<3->{当 \(n=i\) 时, 显然 \(\sum_{j=i}^n b(n,j)a(j,i)=1\)}
+\end{frame}
+
+
+\begin{frame}[fragile]{二项式反演 - 形式2}
+	\begin{theorem}
+		\label{incexc:th:biinv2}
+
+		\begin{equation}
+			\label{incexc:eq:biinv2}
+			f(n)=\sum_{i=0}^n\binom{n}{i}g(i)\iff g(n)=\sum_{i=0}^n(-1)^{n-i}\binom{n}{i}f(i)
+		\end{equation}
+	\end{theorem}
+
+	\pause
+	一般来说, 式 (\ref{incexc:eq:biinv2}) 是更常用的, 其中 \(f(n)\) 表示至少选 \(n\) 个东西时的方案数, \(g(n)\) 表示恰好选 \(n\) 个东西时的方案数
+\end{frame}
+
+
+\begin{frame}{证明}
+	\only<1->{由定理 (\ref{incexc:th:biinv1}), 令 \(g'(n)=(-1)^{-i}g(i)\), 则式 (\ref{incexc:eq:biinv1}) 变为}
+
+	\only<2->{\[
+			f(n)=\sum_{i=0}^n\binom{n}{i}g'(i)\iff g'(n)=\sum_{i=0}^n(-1)^{i-n}\binom{n}{i}f(i)=\sum_{i=0}^n(-1)^{n-i}\binom{n}{i}f(i)
+		\]}
+\end{frame}
+
+
+\begin{frame}[fragile]{二项式反演 - 形式3}
+	\begin{theorem}
+		\label{incexc:th:biinv3}
+
+		对 \(\forall m\geqslant n\), 有
+
+		\begin{equation}
+			\label{incexc:eq:biinv3}
+			f(n)=\sum_{i=n}^m \binom{i}{n}g(i)\iff g(n)=\sum_{i=n}^m(-1)^{i-n}\binom{i}{n}f(i)
+		\end{equation}
+	\end{theorem}
+\end{frame}
+
+
+\begin{frame}{证明}
+	\only<1-3>{由引理 (\ref{incexc:lm:inv}), 取}
+
+	\only<2-3>{\begin{itemize}
+			\item<2-3> \[
+					a(n,i)=\begin{cases}
+						\binom{n}{i}, & i\geqslant n \\
+						0,            & i<n
+					\end{cases}
+				\]
+			\item<3> \[
+					b(n,i)=\begin{cases}
+						(-1)^{n-i}\binom{n}{i}, & i\geqslant n \\
+						0,                      & i<n
+					\end{cases}
+				\]
+		\end{itemize}}
+
+	\only<4>{则 \(\forall m>i\geqslant n\),
+
+		\[
+			\begin{aligned}
+				\sum_{j=i}^m b(m,j)a(j,i) & =\sum_{j=i}^m (-1)^{m-j}\binom{m}{j}\binom{j}{i}              \\
+				                          & =\sum_{j=i}^m (-1)^{m-j}\binom{m}{i}\binom{m-i}{m-j}          \\
+				                          & =(-1)^m\binom{m}{i} \sum_{j=i}^m (-1)^j\binom{m-i}{m-j}       \\
+				                          & =(-1)^m\binom{m}{i} \sum_{j=0}^{m-i} (-1)^{m-j}\binom{m-i}{j} \\
+				                          & =(-1)^m\binom{m}{i} (1-1)^{m-i}                               \\
+				                          & =0
+			\end{aligned}
+		\]}
+
+	\only<5->{当 \(m=i\) 时, 显然 \(\sum_{j=i}^m b(m,j)a(j,i)=1\)}
+\end{frame}

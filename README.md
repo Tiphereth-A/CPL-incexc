@@ -1,8 +1,8 @@
-# LectureTemplate
+# CPL-incexc
 
-![GitHub](https://img.shields.io/github/license/Tiphereth-A/LectureTemplate)
+![GitHub](https://img.shields.io/github/license/Tiphereth-A/CPL-incexc)
 
-My template of LaTeX lecture & slice, powered by [metropolis](https://github.com/matze/mtheme)
+My LaTeX lecture & slice about inclusion–exclusion principle, powered by [metropolis](https://github.com/matze/mtheme)
 
 ## Usage
 
